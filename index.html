@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="fr-FR">
+<head>
+<meta charset="UTF-8" />
+<title>Vitals Calculator</title>
+<meta name="viewport" content="width=device-width" />
+<link rel="stylesheet" type="text/css" href="assets/style.css" />
+<script src="assets/script.js"></script>
+</head>
+<body>
+<h1>Vitals Calculator</h1>
+<h2><abbr title="Indice de masse corporelle">IMC</abbr></h2>
+<form id="form_imc" action="#" method="post">
+    <ul>
+        <li class="box">
+            <label for="form_imc_weight">Poids (kg)</label>
+            <input name="form_imc_weight" id="form_imc_weight" type="number" value="80" />
+        </li>
+        <li class="box">
+            <label for="form_imc_height">Taille (cm)</label>
+            <input name="form_imc_height" id="form_imc_height" type="number" value="175" />
+        </li>
+    </ul>
+    <div class="result" aria-live="polite">
+        Résultat: <span id="form_imc_result">0</span>
+    </div>
+</form>
+</body>
+</html>
