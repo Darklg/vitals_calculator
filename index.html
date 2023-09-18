@@ -4,8 +4,8 @@
 <meta charset="UTF-8" />
 <title>Vitals Calculator</title>
 <meta name="viewport" content="width=device-width" />
-<link rel="stylesheet" type="text/css" href="assets/style.css?v=20230918133446" />
-<script src="assets/script.js?v=20230918133446"></script>
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=20230918135310" />
+<script src="assets/script.js?v=20230918135310"></script>
 </head>
 <body>
 <h1>Vitals Calculator</h1>
@@ -40,50 +40,76 @@
         </li>
     </ul>
     <div class="result" aria-live="polite">
-        <strong>Vitesses : </strong><br />
+        <strong>Vitesses :</strong><br />
         <table>
-            <tr>
-                <th>Aerobie</th>
-                <td colspan="2">
-                    <span id="form_vma_result_aero">0</span>
-                </td>
-            </tr>
-            <tr>
-                <th>5k</th>
-                <td>
-                    <span id="form_vma_result_5k">0</span>
-                </td>
-                <td>
-                    <span id="form_vma_result_5k_duration">0</span>
-                </td>
-            </tr>
-            <tr>
-                <th>10k</th>
-                <td>
-                    <span id="form_vma_result_10k">0</span>
-                </td>
-                <td>
-                    <span id="form_vma_result_10k_duration">0</span>
-                </td>
-            </tr>
-            <tr>
-                <th>Semi</th>
-                <td>
-                    <span id="form_vma_result_semi">0</span>
-                </td>
-                <td>
-                    <span id="form_vma_result_semi_duration">0</span>
-                </td>
-            </tr>
-            <tr>
-                <th>Marathon</th>
-                <td>
-                    <span id="form_vma_result_marathon">0</span>
-                </td>
-                <td>
-                    <span id="form_vma_result_marathon_duration">0</span>
-                </td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>min/km</th>
+                    <th>km/h</th>
+                    <th>Durée</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Aerobie</th>
+                    <td>
+                        <span id="form_vma_result_aero">0</span>
+                    </td>
+                    <td>
+                        <span id="form_vma_result_aero_speed">0</span>
+                    </td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <th>5k</th>
+                    <td>
+                        <span id="form_vma_result_5k">0</span>
+                    </td>
+                    <td>
+                        <span id="form_vma_result_5k_speed">0</span>
+                    </td>
+                    <td>
+                        <span id="form_vma_result_5k_duration" >0</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>10k</th>
+                    <td>
+                        <span id="form_vma_result_10k">0</span>
+                    </td>
+                    <td>
+                        <span id="form_vma_result_10k_speed">0</span>
+                    </td>
+                    <td>
+                        <span id="form_vma_result_10k_duration" >0</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Semi</th>
+                    <td>
+                        <span id="form_vma_result_semi">0</span>
+                    </td>
+                    <td>
+                        <span id="form_vma_result_semi_speed">0</span>
+                    </td>
+                    <td>
+                        <span id="form_vma_result_semi_duration" >0</span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Marathon</th>
+                    <td>
+                        <span id="form_vma_result_marathon">0</span>
+                    </td>
+                    <td>
+                        <span id="form_vma_result_marathon_speed">0</span>
+                    </td>
+                    <td>
+                        <span id="form_vma_result_marathon_duration" >0</span>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </form>
