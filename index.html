@@ -10,11 +10,12 @@
 <body>
 <h1>Vitals Calculator</h1>
 <h2><abbr title="Indice de masse corporelle">IMC</abbr></h2>
+
 <form id="form_imc" action="#" method="post">
     <ul>
         <li class="box">
             <label for="form_imc_weight">Poids (kg)</label>
-            <input name="form_imc_weight" id="form_imc_weight" type="number" value="80" />
+            <input name="form_imc_weight" id="form_imc_weight" type="number" value="73" />
         </li>
         <li class="box">
             <label for="form_imc_height">Taille (cm)</label>
@@ -25,5 +26,31 @@
         Résultat: <span id="form_imc_result">0</span>
     </div>
 </form>
+
+<h2><abbr title="Vitesse Maximale Aérobie">VMA</abbr></h2>
+<form id="form_vma" action="#" method="post">
+    <ul>
+        <li class="box">
+            <label for="form_vma_vo2max">VO2Max (mL/kg/min)</label>
+            <input name="form_vma_vo2max" id="form_vma_vo2max" type="number" value="46.1" />
+        </li>
+        <li class="box">
+            <label for="form_vma_vma">VMA (km/h)</label>
+            <input name="form_vma_vma" id="form_vma_vma" type="number" value="12.8" />
+        </li>
+    </ul>
+    <div class="result" aria-live="polite">
+        <strong>Vitesses : </strong><br />
+        <table>
+        <tr><th>aerobie</th><td><span id="form_vma_result_aero">0</span></td></tr>
+        <tr><th>5k</th><td><span id="form_vma_result_5k">0</span></td></tr>
+        <tr><th>10k</th><td><span id="form_vma_result_10k">0</span></td></tr>
+        <tr><th>Semi</th><td><span id="form_vma_result_semi">0</span></td></tr>
+        <tr><th>Marathon</th><td><span id="form_vma_result_marathon">0</span></td></tr>
+        </table>
+    </div>
+</form>
+
+
 </body>
 </html>
