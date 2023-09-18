@@ -112,3 +112,14 @@ form .result {
     padding: 1em;
     background-color: #E0E0E0;
 }
+
+form .result table {
+    border-collapse: collapse;
+}
+
+form .result table td,
+form .result table th {
+    padding: 0.5em;
+    border: 1px solid #999;
+    text-align: left;
+}
