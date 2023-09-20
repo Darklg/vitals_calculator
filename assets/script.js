@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     'use strict';
 
-    function update_el_value(el, value){
+    function update_el_value(el, value) {
         var multi = parseFloat(el.getAttribute('data-multi'));
         if (!multi) {
             multi = 1;
@@ -10,7 +10,12 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!divi) {
             divi = 1;
         }
-        value = Math.floor(value * multi / divi);
+        var deci = parseFloat(el.getAttribute('data-deci'));
+        if (!deci) {
+            deci = 0;
+        }
+
+        value = (value * multi / divi).toFixed(deci);
         el.innerHTML = value;
     }
 
@@ -25,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
             $result_tmr_base = document.querySelectorAll('.form_imc_result_tmr_base'),
             $result_tmr = document.querySelectorAll('.form_imc_result_tmr'),
             $result_tmr_deficit = document.querySelectorAll('.form_imc_result_tmr_deficit'),
+            $result_kcal_def = document.querySelectorAll('.form_imc_result_kcal_def'),
             $result_imc = document.getElementById('form_imc_result_imc');
 
         function onchange() {
@@ -32,10 +38,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 _height = parseFloat($height.value, 10),
                 _age = parseFloat($age.value, 10),
                 _sex = $sex.value,
+                _deficit = parseFloat($deficit.value),
                 _result_tmr_base,
                 _result_tmr,
                 _result_tmr_deficit,
                 _result_imc = _weight * 1000000 / (_height * _height);
+
+            if (!_deficit) {
+                _deficit = 0;
+            }
 
             if (_sex == 'man') {
                 _result_tmr = 13.397 * _weight + 4.799 * _height - 5.677 * _age + 88.362;
@@ -46,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             _result_tmr_base = _result_tmr;
             _result_tmr *= parseFloat($profil.value);
-            _result_tmr_deficit = _result_tmr + parseFloat($deficit.value);
+            _result_tmr_deficit = _result_tmr + _deficit;
 
             /* IMC */
             $result_imc.innerHTML = Math.floor(_result_imc) / 100;
@@ -60,6 +71,9 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             Array.prototype.forEach.call($result_tmr_deficit, function(el) {
                 update_el_value(el, _result_tmr_deficit);
+            });
+            Array.prototype.forEach.call($result_kcal_def, function(el) {
+                update_el_value(el, _deficit);
             });
 
             /* TMR */
