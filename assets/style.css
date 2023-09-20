@@ -155,5 +155,6 @@ form .result table th {
 
 form .result table small {
     display: block;
+    font-weight: normal;
     line-height: 1.2;
 }
