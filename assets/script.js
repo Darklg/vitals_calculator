@@ -1,12 +1,30 @@
 document.addEventListener("DOMContentLoaded", function() {
     'use strict';
 
+    function update_el_value(el, value){
+        var multi = parseFloat(el.getAttribute('data-multi'));
+        if (!multi) {
+            multi = 1;
+        }
+        var divi = parseFloat(el.getAttribute('data-divi'));
+        if (!divi) {
+            divi = 1;
+        }
+        value = Math.floor(value * multi / divi);
+        el.innerHTML = value;
+    }
+
     (function() {
         var $weight = document.getElementById('form_imc_weight'),
             $height = document.getElementById('form_imc_height'),
+            $profil = document.getElementById('form_imc_profil'),
             $age = document.getElementById('form_imc_age'),
+            $deficit = document.getElementById('form_imc_deficit'),
             $sex = document.getElementById('form_imc_sex'),
+            $result_weight = document.querySelectorAll('.form_imc_result_weight'),
+            $result_tmr_base = document.querySelectorAll('.form_imc_result_tmr_base'),
             $result_tmr = document.querySelectorAll('.form_imc_result_tmr'),
+            $result_tmr_deficit = document.querySelectorAll('.form_imc_result_tmr_deficit'),
             $result_imc = document.getElementById('form_imc_result_imc');
 
         function onchange() {
@@ -14,7 +32,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 _height = parseFloat($height.value, 10),
                 _age = parseFloat($age.value, 10),
                 _sex = $sex.value,
+                _result_tmr_base,
                 _result_tmr,
+                _result_tmr_deficit,
                 _result_imc = _weight * 1000000 / (_height * _height);
 
             if (_sex == 'man') {
@@ -24,14 +44,27 @@ document.addEventListener("DOMContentLoaded", function() {
                 _result_tmr = 9.247 * _weight + 3.098 * _height - 4.330 * _age + 447.593;
             }
 
+            _result_tmr_base = _result_tmr;
+            _result_tmr *= parseFloat($profil.value);
+            _result_tmr_deficit = _result_tmr + parseFloat($deficit.value);
+
             /* IMC */
             $result_imc.innerHTML = Math.floor(_result_imc) / 100;
-            $result_tmr.innerHTML = Math.floor(_result_tmr);
 
-            Array.prototype.forEach.call($result_tmr, function(el){
-                var multi = parseFloat(el.getAttribute('data-multi'));
-                el.innerHTML = Math.floor(_result_tmr * multi);
+            /* TMR */
+            Array.prototype.forEach.call($result_tmr, function(el) {
+                update_el_value(el, _result_tmr);
+            });
+            Array.prototype.forEach.call($result_tmr_base, function(el) {
+                update_el_value(el, _result_tmr_base);
+            });
+            Array.prototype.forEach.call($result_tmr_deficit, function(el) {
+                update_el_value(el, _result_tmr_deficit);
+            });
 
+            /* TMR */
+            Array.prototype.forEach.call($result_weight, function(el) {
+                update_el_value(el, _weight);
             });
         }
 
@@ -41,6 +74,8 @@ document.addEventListener("DOMContentLoaded", function() {
             $sex.addEventListener(_events[i], onchange, 1);
             $weight.addEventListener(_events[i], onchange, 1);
             $height.addEventListener(_events[i], onchange, 1);
+            $profil.addEventListener(_events[i], onchange, 1);
+            $deficit.addEventListener(_events[i], onchange, 1);
         }
 
         onchange();

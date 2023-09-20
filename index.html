@@ -4,17 +4,17 @@
 <meta charset="UTF-8" />
 <title>Vitals Calculator</title>
 <meta name="viewport" content="width=device-width" />
-<link rel="stylesheet" type="text/css" href="assets/style.css?v=20230920124244" />
-<script src="assets/script.js?v=20230920124244"></script>
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=20230920135853" />
+<script src="assets/script.js?v=20230920135853"></script>
 </head>
 <body>
 <h1>Vitals Calculator</h1>
-<h2><abbr title="Indice de masse corporelle">IMC</abbr> & <abbr title="Taux métabolique de Base">TMR</abbr></h2>
+<h2><abbr title="Indice de masse corporelle">IMC</abbr> & <abbr title="Taux métabolique de Base">TMB</abbr></h2>
 
 <form id="form_imc" action="#" method="post">
     <ul>
         <li>
-            <ul class="twoboxes">
+            <ul class="twoboxes simple-grid">
                 <li class="box">
                     <label for="form_imc_weight">Poids (kg)</label>
                     <input name="form_imc_weight" id="form_imc_weight" type="number" value="75" />
@@ -26,7 +26,7 @@
             </ul>
         </li>
         <li>
-            <ul class="twoboxes">
+            <ul class="twoboxes simple-grid">
                 <li class="box">
                     <label for="form_imc_age">&Acirc;ge (ans)</label>
                     <input name="form_imc_age" id="form_imc_age" type="number" value="30" />
@@ -40,45 +40,104 @@
                 </li>
             </ul>
         </li>
+        <li>
+            <ul class="twoboxes simple-grid">
+                <li class="box">
+                    <label for="form_imc_profil">Profil</label>
+                    <select name="form_imc_profil" id="form_imc_profil" type="select">
+                        <option value="1">Base</option>
+                        <option selected value="1.2">Sédentaire</option>
+                        <option value="1.375">Légèrement actif</option>
+                        <option value="1.55">Actif</option>
+                        <option value="1.725">Très actif</option>
+                        <option value="1.9">Athlète</option>
+                    </select>
+                </li>
+                <li class="box">
+                    <label for="form_imc_deficit">Ajustement calorique (kcal)</label>
+                    <input name="form_imc_deficit" id="form_imc_deficit" type="number" step="10" value="0" />
+                </li>
+            </ul>
+        </li>
 
     </ul>
     <div class="result" aria-live="polite">
-        IMC: <strong id="form_imc_result_imc">0</strong><br />
-        <span>TMR:</span> <small><a href="https://en.wikipedia.org/wiki/Harris%E2%80%93Benedict_equation" lang="en" target="_blank" rel="noopener">(Harris-Benedict) [EN]</a></small><br />
-        <table>
-            <thead>
-                <tr>
-                    <th>Profil</th>
-                    <th>kcal/j</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Base</td>
-                    <td><span class="form_imc_result_tmr" data-multi="1">0</span></td>
-                </tr>
-                <tr>
-                    <td>Sédentaire</td>
-                    <td><span class="form_imc_result_tmr" data-multi="1.2">0</span></td>
-                </tr>
-                <tr>
-                    <td>Légèrement actif</td>
-                    <td><span class="form_imc_result_tmr" data-multi="1.375">0</span></td>
-                </tr>
-                <tr>
-                    <td>Actif</td>
-                    <td><span class="form_imc_result_tmr" data-multi="1.55">0</span></td>
-                </tr>
-                <tr>
-                    <td>Très actif</td>
-                    <td><span class="form_imc_result_tmr" data-multi="1.725">0</span></td>
-                </tr>
-                <tr>
-                    <td>Athlète</td>
-                    <td><span class="form_imc_result_tmr" data-multi="1.9">0</span></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="simple-grid">
+            <div>
+                IMC: <strong id="form_imc_result_imc">0</strong><br />
+                TMB: <strong class="form_imc_result_tmr_base">0</strong>kcal/j<br />
+                <small><a href="https://en.wikipedia.org/wiki/Harris%E2%80%93Benedict_equation" lang="en" target="_blank" rel="noopener">(Harris-Benedict) [EN]</a></small><br />
+                Avec profil: <strong class="form_imc_result_tmr">0</strong>kcal/j<br />
+                Avec ajustement : <strong class="form_imc_result_tmr_deficit">0</strong>kcal/j
+            </div>
+            <div>
+                Macros <br />
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Glucides</th>
+                            <th>Lipides</th>
+                            <th>Protéines</th>
+                            <th>Fibres</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>
+                                <abbr title="Apports journaliers recommandés">AJR</abbr><br/>
+                                <small>sans ajustement</small>
+                            </th>
+                            <td>
+                                <span class="form_imc_result_tmr" data-multi="0.5" data-divi="4">0</span>
+                                g<br />
+                                <small>50% cal</small>
+                            </td>
+                            <td>
+                                <span class="form_imc_result_tmr" data-multi="0.35" data-divi="9">0</span>
+                                g<br />
+                                <small>35% cal</small>
+                            </td>
+                            <td>
+                                <span class="form_imc_result_tmr" data-multi="0.15" data-divi="4">0</span>
+                                g<br />
+                                <small>15% cal</small>
+                            </td>
+                            <td>
+                                30g<br />
+                                <small>(Fixe)</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Sèche<br />
+                                <small>avec ajustement</small>
+                            </th>
+                            <td>
+                                <span class="form_imc_result_tmr_deficit" data-multi="0.5" data-divi="4">0</span>
+                                g<br />
+                                <small>50% cal</small>
+                            </td>
+                            <td>
+                                <span class="form_imc_result_tmr_deficit" data-multi="0.25" data-divi="9">0</span>
+                                g<br />
+                                <small>25% cal</small>
+                            </td>
+                            <td>
+                                <span class="form_imc_result_tmr_deficit" data-multi="0.25" data-divi="4">0</span>
+                                g<br />
+                                <small>25% cal</small>
+                            </td>
+                            <td>
+                                30g<br />
+                                <small>(Fixe)</small>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 </form>
 

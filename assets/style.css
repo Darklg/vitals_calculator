@@ -79,6 +79,24 @@ body {
 }
 
 /* ----------------------------------------------------------
+  Grid
+---------------------------------------------------------- */
+
+@media (min-width:769px) {
+    .simple-grid {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .simple-grid > * {
+        flex: 1;
+        margin-top: 0;
+    }
+}
+
+/* ----------------------------------------------------------
   forms
 ---------------------------------------------------------- */
 
@@ -95,19 +113,6 @@ form ul {
 
 form li + li {
     margin-top: 1.5em;
-}
-
-@media (min-width:769px) {
-    form .twoboxes {
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
-    }
-
-    form .twoboxes > li {
-        flex: 1;
-        margin-top: 0!important;
-    }
 }
 
 form label {
@@ -146,4 +151,9 @@ form .result table th {
     padding: 0.5em;
     border: 1px solid #999;
     text-align: left;
+}
+
+form .result table small {
+    display: block;
+    line-height: 1.2;
 }
