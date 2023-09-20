@@ -4,39 +4,98 @@
 <meta charset="UTF-8" />
 <title>Vitals Calculator</title>
 <meta name="viewport" content="width=device-width" />
-<link rel="stylesheet" type="text/css" href="assets/style.css?v=20230918135310" />
-<script src="assets/script.js?v=20230918135310"></script>
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=20230920124244" />
+<script src="assets/script.js?v=20230920124244"></script>
 </head>
 <body>
 <h1>Vitals Calculator</h1>
-<h2><abbr title="Indice de masse corporelle">IMC</abbr></h2>
+<h2><abbr title="Indice de masse corporelle">IMC</abbr> & <abbr title="Taux métabolique de Base">TMR</abbr></h2>
 
 <form id="form_imc" action="#" method="post">
     <ul>
-        <li class="box">
-            <label for="form_imc_weight">Poids (kg)</label>
-            <input name="form_imc_weight" id="form_imc_weight" type="number" value="73" />
+        <li>
+            <ul class="twoboxes">
+                <li class="box">
+                    <label for="form_imc_weight">Poids (kg)</label>
+                    <input name="form_imc_weight" id="form_imc_weight" type="number" value="73" />
+                </li>
+                <li class="box">
+                    <label for="form_imc_height">Taille (cm)</label>
+                    <input name="form_imc_height" id="form_imc_height" type="number" value="175" />
+                </li>
+            </ul>
         </li>
-        <li class="box">
-            <label for="form_imc_height">Taille (cm)</label>
-            <input name="form_imc_height" id="form_imc_height" type="number" value="175" />
+        <li>
+            <ul class="twoboxes">
+                <li class="box">
+                    <label for="form_imc_age">&Acirc;ge (ans)</label>
+                    <input name="form_imc_age" id="form_imc_age" type="number" value="36" />
+                </li>
+                <li class="box">
+                    <label for="form_imc_sex">Sexe</label>
+                    <select name="form_imc_sex" id="form_imc_sex" type="select">
+                        <option value="man" selected>Homme</option>
+                        <option value="woman">Femme</option>
+                    </select>
+                </li>
+            </ul>
         </li>
+
     </ul>
     <div class="result" aria-live="polite">
-        Résultat: <span id="form_imc_result">0</span>
+        IMC: <strong id="form_imc_result_imc">0</strong><br />
+        <span>TMR:</span> <small><a href="https://en.wikipedia.org/wiki/Harris%E2%80%93Benedict_equation" lang="en" target="_blank" rel="noopener">(Harris-Benedict) [EN]</a></small><br />
+        <table>
+            <thead>
+                <tr>
+                    <th>Profil</th>
+                    <th>kcal/j</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Base</td>
+                    <td><span class="form_imc_result_tmr" data-multi="1">0</span></td>
+                </tr>
+                <tr>
+                    <td>Sédentaire</td>
+                    <td><span class="form_imc_result_tmr" data-multi="1.2">0</span></td>
+                </tr>
+                <tr>
+                    <td>Légèrement actif</td>
+                    <td><span class="form_imc_result_tmr" data-multi="1.375">0</span></td>
+                </tr>
+                <tr>
+                    <td>Actif</td>
+                    <td><span class="form_imc_result_tmr" data-multi="1.55">0</span></td>
+                </tr>
+                <tr>
+                    <td>Très actif</td>
+                    <td><span class="form_imc_result_tmr" data-multi="1.725">0</span></td>
+                </tr>
+                <tr>
+                    <td>Athlète</td>
+                    <td><span class="form_imc_result_tmr" data-multi="1.9">0</span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </form>
 
 <h2><abbr title="Vitesse Maximale Aérobie">VMA</abbr></h2>
 <form id="form_vma" action="#" method="post">
     <ul>
-        <li class="box">
-            <label for="form_vma_vo2max">VO2Max (mL/kg/min)</label>
-            <input name="form_vma_vo2max" id="form_vma_vo2max" type="number" value="46.1" />
-        </li>
-        <li class="box">
-            <label for="form_vma_vma">VMA (km/h)</label>
-            <input name="form_vma_vma" id="form_vma_vma" type="number" value="12.8" />
+        <li>
+            <ul class="twoboxes">
+                <li class="box">
+                    <label for="form_vma_vo2max">VO2Max (mL/kg/min)</label>
+                    <input name="form_vma_vo2max" id="form_vma_vo2max" type="number" value="46.1" />
+                </li>
+                <li class="box">
+                    <label for="form_vma_vma">VMA (km/h)</label>
+                    <input name="form_vma_vma" id="form_vma_vma" type="number" value="12.8" />
+                </li>
+            </ul>
         </li>
     </ul>
     <div class="result" aria-live="polite">

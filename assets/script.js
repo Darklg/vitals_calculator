@@ -4,17 +4,41 @@ document.addEventListener("DOMContentLoaded", function() {
     (function() {
         var $weight = document.getElementById('form_imc_weight'),
             $height = document.getElementById('form_imc_height'),
-            $result = document.getElementById('form_imc_result');
+            $age = document.getElementById('form_imc_age'),
+            $sex = document.getElementById('form_imc_sex'),
+            $result_tmr = document.querySelectorAll('.form_imc_result_tmr'),
+            $result_imc = document.getElementById('form_imc_result_imc');
 
         function onchange() {
             var _weight = parseFloat($weight.value, 10),
                 _height = parseFloat($height.value, 10),
-                _result = _weight * 1000000 / (_height * _height);
-            $result.innerHTML = Math.floor(_result) / 100;
+                _age = parseFloat($age.value, 10),
+                _sex = $sex.value,
+                _result_tmr,
+                _result_imc = _weight * 1000000 / (_height * _height);
+
+            if (_sex == 'man') {
+                _result_tmr = 13.397 * _weight + 4.799 * _height - 5.677 * _age + 88.362;
+            }
+            else {
+                _result_tmr = 9.247 * _weight + 3.098 * _height - 4.330 * _age + 447.593;
+            }
+
+            /* IMC */
+            $result_imc.innerHTML = Math.floor(_result_imc) / 100;
+            $result_tmr.innerHTML = Math.floor(_result_tmr);
+
+            Array.prototype.forEach.call($result_tmr, function(el){
+                var multi = parseFloat(el.getAttribute('data-multi'));
+                el.innerHTML = Math.floor(_result_tmr * multi);
+
+            });
         }
 
-        var _events = ['keydown', 'click', 'change'];
+        var _events = ['keyup', 'click', 'change'];
         for (var i = 0, len = _events.length; i < len; i++) {
+            $age.addEventListener(_events[i], onchange, 1);
+            $sex.addEventListener(_events[i], onchange, 1);
             $weight.addEventListener(_events[i], onchange, 1);
             $height.addEventListener(_events[i], onchange, 1);
         }

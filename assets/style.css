@@ -45,6 +45,10 @@ select {
     background-color: transparent;
 }
 
+small {
+    font-size: 0.8em;
+}
+
 .button-wrapper {
     margin: 1em 0;
     padding-left: 4em;
@@ -93,19 +97,39 @@ form li + li {
     margin-top: 1.5em;
 }
 
+@media (min-width:769px) {
+    form .twoboxes {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    form .twoboxes > li {
+        flex: 1;
+        margin-top: 0!important;
+    }
+}
+
 form label {
     display: block;
     margin-bottom: 0.25em;
     line-height: 1.5;
 }
 
+form select,
 form input[type="number"] {
     display: block;
+    box-sizing: border-box;
     width: 100%;
+    height: 2em;
     padding: 0 0.5em;
     border: 1px solid #CCC;
     line-height: 2;
+    background-color: #FFF;
 }
+
+/* Result
+-------------------------- */
 
 form .result {
     margin-top: 2em;
