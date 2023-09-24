@@ -4,8 +4,8 @@
 <meta charset="UTF-8" />
 <title>Vitals Calculator</title>
 <meta name="viewport" content="width=device-width" />
-<link rel="stylesheet" type="text/css" href="assets/style.css?v=20230920142301" />
-<script src="assets/script.js?v=20230920142301"></script>
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=20230924191147" />
+<script src="assets/script.js?v=20230924191147"></script>
 </head>
 <body>
 <h1>Vitals Calculator</h1>
@@ -17,11 +17,11 @@
             <ul class="twoboxes simple-grid">
                 <li class="box">
                     <label for="form_imc_weight">Poids (kg)</label>
-                    <input name="form_imc_weight" id="form_imc_weight" type="number" value="75" />
+                    <input data-jsu-local-storage name="form_imc_weight" id="form_imc_weight" type="number" value="75" />
                 </li>
                 <li class="box">
                     <label for="form_imc_height">Taille (cm)</label>
-                    <input name="form_imc_height" id="form_imc_height" type="number" value="175" />
+                    <input data-jsu-local-storage name="form_imc_height" id="form_imc_height" type="number" value="175" />
                 </li>
             </ul>
         </li>
@@ -29,11 +29,11 @@
             <ul class="twoboxes simple-grid">
                 <li class="box">
                     <label for="form_imc_age">&Acirc;ge (ans)</label>
-                    <input name="form_imc_age" id="form_imc_age" type="number" value="30" />
+                    <input data-jsu-local-storage name="form_imc_age" id="form_imc_age" type="number" value="30" />
                 </li>
                 <li class="box">
                     <label for="form_imc_sex">Sexe</label>
-                    <select name="form_imc_sex" id="form_imc_sex" type="select">
+                    <select data-jsu-local-storage name="form_imc_sex" id="form_imc_sex" type="select">
                         <option value="man" selected>Homme</option>
                         <option value="woman">Femme</option>
                     </select>
@@ -44,7 +44,7 @@
             <ul class="twoboxes simple-grid">
                 <li class="box">
                     <label for="form_imc_profil">Profil</label>
-                    <select name="form_imc_profil" id="form_imc_profil" type="select">
+                    <select data-jsu-local-storage name="form_imc_profil" id="form_imc_profil" type="select">
                         <option value="1">Base</option>
                         <option selected value="1.2">Sédentaire</option>
                         <option value="1.375">Légèrement actif</option>
@@ -55,7 +55,7 @@
                 </li>
                 <li class="box">
                     <label for="form_imc_deficit">Ajustement calorique (kcal)</label>
-                    <input name="form_imc_deficit" id="form_imc_deficit" type="number" step="10" value="0" />
+                    <input data-jsu-local-storage name="form_imc_deficit" id="form_imc_deficit" type="number" step="10" value="0" />
                 </li>
             </ul>
         </li>
@@ -150,11 +150,11 @@
             <ul class="twoboxes">
                 <li class="box">
                     <label for="form_vma_vo2max">VO2Max (mL/kg/min)</label>
-                    <input name="form_vma_vo2max" id="form_vma_vo2max" type="number" value="46.1" />
+                    <input data-jsu-local-storage name="form_vma_vo2max" id="form_vma_vo2max" type="number" value="46.1" />
                 </li>
                 <li class="box">
                     <label for="form_vma_vma">VMA (km/h)</label>
-                    <input name="form_vma_vma" id="form_vma_vma" type="number" value="12.8" />
+                    <input data-jsu-local-storage name="form_vma_vma" id="form_vma_vma" type="number" value="12.8" />
                 </li>
             </ul>
         </li>
