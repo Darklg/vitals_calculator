@@ -142,6 +142,10 @@ form .result {
     background-color: #E0E0E0;
 }
 
+form .result a {
+    color: inherit;
+}
+
 form .result table {
     border-collapse: collapse;
 }
@@ -157,4 +161,19 @@ form .result table small {
     display: block;
     font-weight: normal;
     line-height: 1.2;
+}
+
+@media (prefers-color-scheme:dark) {
+    body {
+        color: #fff;
+        background-color: #111;
+    }
+
+    form {
+        background-color: #333;
+    }
+
+    form .result {
+        background-color: #444;
+    }
 }

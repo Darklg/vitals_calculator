@@ -101,8 +101,6 @@ document.addEventListener("DOMContentLoaded", function() {
             Array.prototype.forEach.call($result_kcal_def, function(el) {
                 update_el_value(el, _deficit);
             });
-
-            /* TMR */
             Array.prototype.forEach.call($result_weight, function(el) {
                 update_el_value(el, _weight);
             });
