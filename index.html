@@ -4,8 +4,8 @@
 <meta charset="UTF-8" />
 <title>Vitals Calculator</title>
 <meta name="viewport" content="width=device-width" />
-<link rel="stylesheet" type="text/css" href="assets/style.css?v=20230924193715" />
-<script src="assets/script.js?v=20230924193715"></script>
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=20230927085708" />
+<script src="assets/script.js?v=20230927085708"></script>
 </head>
 <body>
 <h1>Vitals Calculator</h1>
@@ -23,10 +23,6 @@
                     <label for="form_imc_height">Taille (cm)</label>
                     <input data-jsu-local-storage name="form_imc_height" id="form_imc_height" type="number" min="120" max="220" value="175" />
                 </li>
-            </ul>
-        </li>
-        <li>
-            <ul class="twoboxes simple-grid">
                 <li class="box">
                     <label for="form_imc_age">&Acirc;ge (ans)</label>
                     <input data-jsu-local-storage name="form_imc_age" id="form_imc_age" type="number" min="18" max="60" value="30" />
@@ -54,6 +50,14 @@
                     </select>
                 </li>
                 <li class="box">
+                    <label for="form_imc_morphologie">Morphologie</label>
+                    <select data-jsu-local-storage name="form_imc_morphologie" id="form_imc_morphologie">
+                        <option value="0.8">Mince</option>
+                        <option selected value="0.9">Moyenne</option>
+                        <option value="1">Large</option>
+                    </select>
+                </li>
+                <li class="box">
                     <label for="form_imc_deficit">Ajustement calorique (kcal)</label>
                     <input data-jsu-local-storage name="form_imc_deficit" id="form_imc_deficit" type="number" step="10" value="0" />
                 </li>
@@ -66,7 +70,7 @@
             <div>
                 <p>
                     IMC: <strong id="form_imc_result_imc">0</strong><br />
-                    TMB: <strong class="form_imc_result_tmr_base">0</strong>kcal/j<br />
+                    TMB: <strong class="form_imc_result_tmr_base">0</strong>kcal/j
                     <small><a href="https://en.wikipedia.org/wiki/Harris%E2%80%93Benedict_equation" lang="en" target="_blank" rel="noopener">(Harris-Benedict) [EN]</a></small><br />
                     Avec profil: <strong class="form_imc_result_tmr">0</strong>kcal/j<br />
                     Avec ajustement : <strong class="form_imc_result_tmr_deficit">0</strong>kcal/j<br />
@@ -74,8 +78,10 @@
                     <small>(1kg de gras = ~7500kcal)</small>
                 </p>
                 <p>
-                    Eau: <strong class="form_imc_result_weight" data-multi="0.03" data-deci="1">0</strong>L/j minimum.
-                    <small><a href="https://www.la-vie-naturelle.com/blog/post/combien-litres-eau-par-jour-faut-il-boire" target="_blank" rel="noopener nofollow">(30ml/kg/j)</a></small>
+                    <strong>Poids &ldquo;Id&eacute;al&rdquo; :</strong> <small><a href="https://fr.wikipedia.org/wiki/Poids_id%C3%A9al" target="_blank" rel="noopener">(Référence)</a></small><br />
+                    Formule de Broca: <strong class="form_imc_result_broca"></strong>kg<br />
+                    Formule de Creff: <strong class="form_imc_result_creff"></strong>kg<br />
+                    Formule de Lorentz: <strong class="form_imc_result_lorentz"></strong>kg
                 </p>
             </div>
             <div>
@@ -84,17 +90,21 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Glucides<small>4kcal/g</small></th>
-                            <th>Lipides<small>9kcal/g</small></th>
-                            <th>Protéines<small>4kcal/g</small></th>
-                            <th>Fibres</th>
+                            <th>
+                                AJR
+                                <small>sans ajustement</small>
+                            </th>
+                            <th>
+                                Sèche
+                                <small>avec ajustement</small>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th>
-                                <abbr title="Apports journaliers recommandés">AJR</abbr><br/>
-                                <small>sans ajustement</small>
+                                Glucides
+                                <small>4kcal/g</small>
                             </th>
                             <td>
                                 <span class="form_imc_result_tmr" data-multi="0.5" data-divi="4">0</span>
@@ -102,41 +112,59 @@
                                 <small>50% cal</small>
                             </td>
                             <td>
-                                <span class="form_imc_result_tmr" data-multi="0.35" data-divi="9">0</span>
+                                <span class="form_imc_result_tmr_deficit" data-multi="0.5" data-divi="4">0</span>
                                 g<br />
-                                <small>35% cal</small>
-                            </td>
-                            <td>
-                                <span class="form_imc_result_tmr" data-multi="0.15" data-divi="4">0</span>
-                                g<br />
-                                <small>15% cal</small>
-                            </td>
-                            <td>
-                                30g<br />
-                                <small>(Fixe)</small>
+                                <small>50% cal</small>
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                Sèche<br />
-                                <small>avec ajustement</small>
+                                Lipides
+                                <small>9kcal/g</small>
                             </th>
                             <td>
-                                <span class="form_imc_result_tmr_deficit" data-multi="0.5" data-divi="4">0</span>
+                                <span class="form_imc_result_tmr" data-multi="0.35" data-divi="9">0</span>
                                 g<br />
-                                <small>50% cal</small>
+                                <small>35% cal</small>
                             </td>
                             <td>
                                 <span class="form_imc_result_tmr_deficit" data-multi="0.25" data-divi="9">0</span>
                                 g<br />
                                 <small>25% cal</small>
                             </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Protéines
+                                <small>4kcal/g</small>
+                            </th>
+                            <td>
+                                <span class="form_imc_result_tmr" data-multi="0.15" data-divi="4">0</span>
+                                g<br />
+                                <small>15% cal</small>
+                            </td>
                             <td>
                                 <span class="form_imc_result_tmr_deficit" data-multi="0.25" data-divi="4">0</span>
                                 g<br />
                                 <small>25% cal</small>
                             </td>
-                            <td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Eau
+                                <small>
+                                    <a href="https://www.la-vie-naturelle.com/blog/post/combien-litres-eau-par-jour-faut-il-boire" target="_blank" rel="noopener nofollow">(30ml/kg/j)</a>
+                                </small>
+                            </th>
+                            <td colspan="2">
+                                <span class="form_imc_result_weight" data-multi="0.03" data-deci="1">0</span>
+                                L/j.
+                                <small>(minimum)</small>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Fibres</th>
+                            <td colspan="2">
                                 30g<br />
                                 <small>(Fixe)</small>
                             </td>

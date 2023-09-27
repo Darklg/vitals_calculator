@@ -8,16 +8,32 @@ document.addEventListener("DOMContentLoaded", function() {
         var el_key = 'data_jsu_' + el.getAttribute('name');
 
         /* Initial value */
-        var initial_value = localStorage.getItem(el_key);
-        if(initial_value){
-            el.value = initial_value;
-        }
+        set_value(el, localStorage.getItem(el_key));
 
         /* Watch changes */
         el.addEventListener('change', function() {
             localStorage.setItem(el_key, el.value);
         });
     });
+
+    function set_value(el, initial_value) {
+        if (!initial_value) {
+            return;
+        }
+        if (el.tagName == 'SELECT' && !option_exists(el, initial_value)) {
+            return;
+        }
+        el.value = initial_value;
+    }
+
+    function option_exists($select, value) {
+        for (var i = 0; i < $select.options.length; i++) {
+            if ($select.options[i].value == value) {
+                return true;
+            }
+        }
+        return false;
+    }
 });
 
 /* ----------------------------------------------------------
@@ -49,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var $weight = document.getElementById('form_imc_weight'),
             $height = document.getElementById('form_imc_height'),
             $profil = document.getElementById('form_imc_profil'),
+            $morphologie = document.getElementById('form_imc_morphologie'),
             $age = document.getElementById('form_imc_age'),
             $deficit = document.getElementById('form_imc_deficit'),
             $sex = document.getElementById('form_imc_sex'),
@@ -57,14 +74,21 @@ document.addEventListener("DOMContentLoaded", function() {
             $result_tmr = document.querySelectorAll('.form_imc_result_tmr'),
             $result_tmr_deficit = document.querySelectorAll('.form_imc_result_tmr_deficit'),
             $result_kcal_def = document.querySelectorAll('.form_imc_result_kcal_def'),
-            $result_imc = document.getElementById('form_imc_result_imc');
+            $result_imc = document.getElementById('form_imc_result_imc'),
+            $result_broca = document.querySelectorAll('.form_imc_result_broca'),
+            $result_lorentz = document.querySelectorAll('.form_imc_result_lorentz'),
+            $result_creff = document.querySelectorAll('.form_imc_result_creff');
 
         function onchange() {
             var _weight = parseFloat($weight.value, 10),
                 _height = parseFloat($height.value, 10),
                 _age = parseFloat($age.value, 10),
                 _sex = $sex.value,
+                _morphologie = parseFloat($morphologie.value),
                 _deficit = parseFloat($deficit.value),
+                _result_broca,
+                _result_lorentz,
+                _result_creff,
                 _result_tmr_base,
                 _result_tmr,
                 _result_tmr_deficit,
@@ -74,13 +98,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 _deficit = 0;
             }
 
+            _result_creff = (_height - 100 + _age / 10) * _morphologie;
             if (_sex == 'man') {
+                _result_lorentz = _height - 100 - ((_height - 150) / 4);
                 _result_tmr = 13.397 * _weight + 4.799 * _height - 5.677 * _age + 88.362;
             }
             else {
+                _result_lorentz = _height - 100 - ((_height - 150) / 2.5);
                 _result_tmr = 9.247 * _weight + 3.098 * _height - 4.330 * _age + 447.593;
             }
 
+            _result_broca = _height - 100;
             _result_tmr_base = _result_tmr;
             _result_tmr *= parseFloat($profil.value);
             _result_tmr_deficit = _result_tmr + _deficit;
@@ -104,12 +132,22 @@ document.addEventListener("DOMContentLoaded", function() {
             Array.prototype.forEach.call($result_weight, function(el) {
                 update_el_value(el, _weight);
             });
+            Array.prototype.forEach.call($result_broca, function(el) {
+                update_el_value(el, _result_broca);
+            });
+            Array.prototype.forEach.call($result_creff, function(el) {
+                update_el_value(el, _result_creff);
+            });
+            Array.prototype.forEach.call($result_lorentz, function(el) {
+                update_el_value(el, _result_lorentz);
+            });
         }
 
         var _events = ['keyup', 'click', 'change'];
         for (var i = 0, len = _events.length; i < len; i++) {
             $age.addEventListener(_events[i], onchange, 1);
             $sex.addEventListener(_events[i], onchange, 1);
+            $morphologie.addEventListener(_events[i], onchange, 1);
             $weight.addEventListener(_events[i], onchange, 1);
             $height.addEventListener(_events[i], onchange, 1);
             $profil.addEventListener(_events[i], onchange, 1);
