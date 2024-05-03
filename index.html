@@ -4,8 +4,8 @@
 <meta charset="UTF-8" />
 <title>Vitals Calculator</title>
 <meta name="viewport" content="width=device-width" />
-<link rel="stylesheet" type="text/css" href="assets/style.css?v=20230927085708" />
-<script src="assets/script.js?v=20230927085708"></script>
+<link rel="stylesheet" type="text/css" href="assets/style.css?v=20240503084530" />
+<script src="assets/script.js?v=20240503084530"></script>
 </head>
 <body>
 <h1>Vitals Calculator</h1>
@@ -177,11 +177,64 @@
     </div>
 </form>
 
+<h2>Dépense calorique théorique</h2>
+<form id="form_met" action="#" method="post">
+<ul>
+    <li>
+        <ul class="simple-grid">
+            <li class="box">
+                <label for="form_met_activity"><abbr title="https://fr.wikipedia.org/wiki/%C3%89quivalent_m%C3%A9tabolique">MET</abbr></label>
+                <select name="form_met_activity" id="form_met_activity">
+                    <optgroup label="Vie">
+                        <option value="1">Lecture / Jeux vidéos / TV</option>
+                        <option value="1.8">Faire la vaisselle</option>
+                        <option value="3">Ménage</option>
+                    </optgroup>
+                    <optgroup label="Marche">
+                        <option value="2">Marche lente</option>
+                        <option value="3">Promener le chien</option>
+                        <option value="4">Marche rapide (aller au travail)</option>
+                    </optgroup>
+                    <optgroup label="Vélo">
+                        <option value="4">Vélo à assistance éléctrique</option>
+                        <option value="6.8">Promenade à vélo</option>
+                        <option value="7">Vélo d’appartement</option>
+                        <option value="8.5">VTT</option>
+                        <option value="10.0">Cyclisme ~24km/h</option>
+                        <option value="16.8">Cyclisme à plus de 32km/h</option>
+                    </optgroup>
+                    <optgroup label="Course à pied">
+                        <option value="7">Course à pied type jogging</option>
+                        <option value="10">Running ~10km/h</option>
+                        <option value="12">Running ~12km/h</option>
+                        <option value="23">Sprint ~23km/h</option>
+                    </optgroup>
+                </select>
+                <small>Sources:
+                    <a href="https://fr.wikipedia.org/wiki/%C3%89quivalent_m%C3%A9tabolique" target="_blank" rel="noopener">Wikipédia</a>,
+                    <a href="https://pubmed.ncbi.nlm.nih.gov/21798015/" lang="en" target="_blank" rel="noopener">Pubmed</a>
+                </small>
+            </li>
+            <li class="box">
+                <label for="form_met_duration">Durée (min)</label>
+                <input name="form_met_duration" id="form_met_duration" type="number" value="30" />
+            </li>
+        </ul>
+    </li>
+</ul>
+    <div class="result" aria-live="polite">
+        <p>
+            <strong>Dépense calorique :</strong> <strong id="form_met_result_calories">0</strong>kcal
+        </p>
+        <p><small><strong>Formule :</strong> (MET &times; Poids en kg &times; 3.5) / 200</small></p>
+    </div>
+</form>
+
 <h2><abbr title="Vitesse Maximale Aérobie">VMA</abbr></h2>
 <form id="form_vma" action="#" method="post">
     <ul>
         <li>
-            <ul class="twoboxes">
+            <ul class="simple-grid">
                 <li class="box">
                     <label for="form_vma_vo2max">VO2Max (mL/kg/min)</label>
                     <input data-jsu-local-storage name="form_vma_vo2max" id="form_vma_vo2max" type="number" value="46.1" />

@@ -121,6 +121,10 @@ form label {
     line-height: 1.5;
 }
 
+form a {
+    color: inherit;
+}
+
 form select,
 form input[type="number"] {
     display: block;

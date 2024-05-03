@@ -66,6 +66,8 @@ document.addEventListener("DOMContentLoaded", function() {
             $height = document.getElementById('form_imc_height'),
             $profil = document.getElementById('form_imc_profil'),
             $morphologie = document.getElementById('form_imc_morphologie'),
+            $met_duration = document.getElementById('form_met_duration'),
+            $met_activity = document.getElementById('form_met_activity'),
             $age = document.getElementById('form_imc_age'),
             $deficit = document.getElementById('form_imc_deficit'),
             $sex = document.getElementById('form_imc_sex'),
@@ -74,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
             $result_tmr = document.querySelectorAll('.form_imc_result_tmr'),
             $result_tmr_deficit = document.querySelectorAll('.form_imc_result_tmr_deficit'),
             $result_kcal_def = document.querySelectorAll('.form_imc_result_kcal_def'),
+            $result_met_calories = document.getElementById('form_met_result_calories'),
             $result_imc = document.getElementById('form_imc_result_imc'),
             $result_broca = document.querySelectorAll('.form_imc_result_broca'),
             $result_lorentz = document.querySelectorAll('.form_imc_result_lorentz'),
@@ -85,6 +88,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 _age = parseFloat($age.value, 10),
                 _sex = $sex.value,
                 _morphologie = parseFloat($morphologie.value),
+                _met_duration = parseFloat($met_duration.value) || 1,
+                _met_activity = parseFloat($met_activity.value) || 1,
                 _deficit = parseFloat($deficit.value),
                 _result_broca,
                 _result_lorentz,
@@ -102,8 +107,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (_sex == 'man') {
                 _result_lorentz = _height - 100 - ((_height - 150) / 4);
                 _result_tmr = 13.397 * _weight + 4.799 * _height - 5.677 * _age + 88.362;
-            }
-            else {
+            } else {
                 _result_lorentz = _height - 100 - ((_height - 150) / 2.5);
                 _result_tmr = 9.247 * _weight + 3.098 * _height - 4.330 * _age + 447.593;
             }
@@ -115,6 +119,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
             /* IMC */
             $result_imc.innerHTML = Math.floor(_result_imc) / 100;
+
+            /* Met */
+            $result_met_calories.innerHTML = Math.floor(_met_duration * _met_activity * _weight * 3.5 / 200);
 
             /* TMR */
             Array.prototype.forEach.call($result_tmr, function(el) {
@@ -152,11 +159,27 @@ document.addEventListener("DOMContentLoaded", function() {
             $height.addEventListener(_events[i], onchange, 1);
             $profil.addEventListener(_events[i], onchange, 1);
             $deficit.addEventListener(_events[i], onchange, 1);
+            $met_duration.addEventListener(_events[i], onchange, 1);
+            $met_activity.addEventListener(_events[i], onchange, 1);
         }
 
         onchange();
 
     }());
+
+    /* ----------------------------------------------------------
+     MET
+    ---------------------------------------------------------- */
+
+    var $form_met_activity = document.getElementById('form_met_activity');
+    Array.prototype.forEach.call($form_met_activity.querySelectorAll('option'), function(option) {
+        option.innerHTML = option.innerHTML + ' — ' + option.value + ' MET';
+    });
+
+
+    /* ----------------------------------------------------------
+      VMA
+    ---------------------------------------------------------- */
 
     function speed_to_minutes(value) {
         var hours = Math.floor(value / 60);
