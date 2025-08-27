@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
             $sex = document.getElementById('form_imc_sex'),
             $result_weight = document.querySelectorAll('.form_imc_result_weight'),
             $result_tmr_base = document.querySelectorAll('.form_imc_result_tmr_base'),
+            $result_tmr_activite = document.querySelectorAll('.form_imc_result_tmr_activite'),
             $result_tmr = document.querySelectorAll('.form_imc_result_tmr'),
             $result_tmr_deficit = document.querySelectorAll('.form_imc_result_tmr_deficit'),
             $result_kcal_def = document.querySelectorAll('.form_imc_result_kcal_def'),
@@ -95,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 _result_lorentz,
                 _result_creff,
                 _result_tmr_base,
+                _result_tmr_activite,
                 _result_tmr,
                 _result_tmr_deficit,
                 _result_imc = _weight * 1000000 / (_height * _height);
@@ -115,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
             _result_broca = _height - 100;
             _result_tmr_base = _result_tmr;
             _result_tmr *= parseFloat($profil.value);
+            _result_tmr_activite = _result_tmr - _result_tmr_base;
             _result_tmr_deficit = _result_tmr + _deficit;
 
             /* IMC */
@@ -129,6 +132,9 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             Array.prototype.forEach.call($result_tmr_base, function(el) {
                 update_el_value(el, _result_tmr_base);
+            });
+            Array.prototype.forEach.call($result_tmr_activite, function(el) {
+                update_el_value(el, _result_tmr_activite);
             });
             Array.prototype.forEach.call($result_tmr_deficit, function(el) {
                 update_el_value(el, _result_tmr_deficit);

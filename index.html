@@ -72,11 +72,13 @@
                     IMC: <strong id="form_imc_result_imc">0</strong><br />
                     TMB: <strong class="form_imc_result_tmr_base">0</strong>kcal/j
                     <small><a href="https://en.wikipedia.org/wiki/Harris%E2%80%93Benedict_equation" lang="en" target="_blank" rel="noopener">(Harris-Benedict) [EN]</a></small><br />
+                    Extra MET: <strong class="form_imc_result_tmr_activite">0</strong>kcal/j<br />
                     Avec profil: <strong class="form_imc_result_tmr">0</strong>kcal/j<br />
                     Avec ajustement : <strong class="form_imc_result_tmr_deficit">0</strong>kcal/j<br />
                     Variation de poids : <strong class="form_imc_result_kcal_def" data-multi="0.004" data-deci="1">0</strong>kg/mois<br />
                     <small>(1kg de gras = ~7500kcal)</small>
                 </p>
+                <hr />
                 <p>
                     <strong>Poids &ldquo;Id&eacute;al&rdquo; :</strong> <small><a href="https://fr.wikipedia.org/wiki/Poids_id%C3%A9al" target="_blank" rel="noopener">(Référence)</a></small><br />
                     Formule de Broca: <strong class="form_imc_result_broca"></strong>kg<br />
@@ -169,6 +171,13 @@
                                 <small>(Fixe)</small>
                             </td>
                         </tr>
+                        <tr>
+                            <th>Sel</th>
+                            <td colspan="2">
+                                5g<br />
+                                <small>(Fixe)</small>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -183,7 +192,7 @@
     <li>
         <ul class="simple-grid">
             <li class="box">
-                <label for="form_met_activity"><abbr title="https://fr.wikipedia.org/wiki/%C3%89quivalent_m%C3%A9tabolique">MET</abbr></label>
+                <label for="form_met_activity"><abbr title="Equivalent metabolique">MET</abbr></label>
                 <select name="form_met_activity" id="form_met_activity">
                     <optgroup label="Vie">
                         <option value="1">Lecture / Jeux vidéos / TV</option>
