@@ -188,9 +188,10 @@ document.addEventListener("DOMContentLoaded", function() {
     ---------------------------------------------------------- */
 
     function speed_to_minutes(value) {
-        var hours = Math.floor(value / 60);
-        var minutes = Math.floor(value - (hours * 60));
-        var seconds = Math.round((value - Math.floor(value)) * 60);
+        var total = Math.round(value * 60);
+        var hours = Math.floor(total / 3600);
+        var minutes = Math.floor(total / 60) % 60;
+        var seconds = total % 60;
         return (hours ? hours + 'h ' : '') + minutes + '&prime;' + seconds + '&Prime;';
     }
 
@@ -200,27 +201,49 @@ document.addEventListener("DOMContentLoaded", function() {
 
             _ratios = [{
                     'name': 'aero',
-                    'distance': 1,
+                    'label': 'Aérobie',
                     'ratio': 1
                 }, {
+                    'name': 'mile',
+                    'label': 'Mile',
+                    'distance': 1.609344,
+                    'ratio': 0.98
+                }, {
                     'name': '5k',
+                    'label': '5k',
                     'distance': 5,
-                    'ratio': 0.94
+                    'ratio': 0.93
                 }, {
                     'name': '10k',
+                    'label': '10k',
                     'distance': 10,
-                    'ratio': 0.92
+                    'ratio': 0.89
                 }, {
-                    'name': 'semi',
-                    'distance': 21.1,
+                    'name': '15k',
+                    'label': '15k',
+                    'distance': 15,
                     'ratio': 0.86
                 }, {
+                    'name': 'semi',
+                    'label': 'Semi',
+                    'distance': 21.1,
+                    'ratio': 0.84
+                }, {
                     'name': 'marathon',
+                    'label': 'Marathon',
                     'distance': 42.195,
-                    'ratio': 0.82
+                    'ratio': 0.79
                 }
 
             ];
+
+        document.querySelector('#form_vma_result tbody').innerHTML = _ratios.map(function(r) {
+            var _id = 'form_vma_result_' + r.name;
+            return '<tr><th>' + r.label + '</th>' +
+                '<td><span id="' + _id + '">0</span></td>' +
+                '<td><span id="' + _id + '_speed">0</span></td>' +
+                '<td>' + (r.distance ? '<span id="' + _id + '_duration">0</span>' : '-') + '</td></tr>';
+        }).join('');
 
         function onchange(e) {
             var $field = e.target;
